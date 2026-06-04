@@ -91,7 +91,7 @@
                             severity="secondary"
                             [text]="true"
                             pTooltip="Mover acima"
-                            tooltipPosition="top"
+                            [tooltipPosition]="(index + 1) >= lista().length ? 'none' : 'top'"
                             [disabled]="(index + 1) >= lista().length"
                             (click)="aoReOrdenar(index, 'down')"
                         />
@@ -100,7 +100,7 @@
                             severity="secondary"
                             [text]="true"
                             pTooltip="Mover abaixo"
-                            tooltipPosition="top"
+                            [tooltipPosition]="index < 1 ? 'none' : 'top'"
                             [disabled]="index < 1"
                             (click)="aoReOrdenar(index, 'up')"
                         />
