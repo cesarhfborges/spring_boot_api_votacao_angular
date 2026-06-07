@@ -54,7 +54,6 @@ export class NaoVotanteEditar implements OnInit {
 
     async submit(): Promise<void> {
         try {
-            console.log('submit', this.form.value);
             this.form.markAllAsTouched();
             this.form.markAllAsDirty();
             if (this.form.invalid) {
