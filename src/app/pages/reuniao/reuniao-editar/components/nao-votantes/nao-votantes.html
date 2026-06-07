@@ -27,7 +27,6 @@
         stripedRows
         showGridlines
     >
-
         <ng-template pTemplate="header">
             <tr>
                 <th>Usuário</th>
@@ -37,42 +36,31 @@
                 </th>
             </tr>
         </ng-template>
-
         <ng-template pTemplate="body" let-bloqueio>
-
             <tr>
-
                 <td>
                     <span class="font-medium text-surface-700">
-                        {{ bloqueio.funcionarioId }}
+                        {{ bloqueio.funcionario.nome }} {{ bloqueio.funcionario.sobrenome }}
                     </span>
                 </td>
-
                 <td>
                     <span class="text-surface-600">
                         {{ bloqueio.motivo }}
                     </span>
                 </td>
-
                 <td>
-
                     <div class="flex justify-center">
-
                         <p-button
                             icon="pi pi-user-minus"
                             severity="danger"
                             [text]="true"
                             pTooltip="Permitir votação"
-                            (onClick)="removerBloqueio(bloqueio.id)" />
-
+                            (onClick)="removerBloqueio(bloqueio.id)"
+                        />
                     </div>
-
                 </td>
-
             </tr>
-
         </ng-template>
-
         <ng-template pTemplate="emptymessage">
             <tr>
                 <td colspan="6">

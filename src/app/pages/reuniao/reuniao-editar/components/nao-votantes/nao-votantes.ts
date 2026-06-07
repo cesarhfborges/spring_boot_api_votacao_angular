@@ -8,6 +8,9 @@ import { TableModule } from 'primeng/table';
 import { Card } from 'primeng/card';
 import { Reuniao } from '@/app/core/models/reuniao';
 import { Tooltip } from 'primeng/tooltip';
+import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
+import { NaoVotanteEditar } from '@/app/pages/reuniao/reuniao-editar/components/nao-votante-editar/nao-votante-editar';
 
 @Component({
     selector: 'app-nao-votantes',
@@ -23,6 +26,8 @@ export class NaoVotantes {
 
     protected loading = signal(false);
 
+    private readonly dialogService = inject(DialogService);
+    private readonly messageService = inject(MessageService);
     private readonly bloqueioVotoService = inject(BloqueioVotoService);
 
     constructor() {
@@ -36,18 +41,55 @@ export class NaoVotantes {
         });
     }
 
-    private async carregarBloqueios(reuniaoId: number, pautaId: number): Promise<void> {
-        this.loading.set(true);
-        try {
-            const bloqueios = await firstValueFrom(this.bloqueioVotoService.listar(reuniaoId, pautaId));
-            this.lista.set(bloqueios);
-        } finally {
-            this.loading.set(false);
-        }
-    }
+    protected abrirModalBloqueio(opcao?: any): void {
+        const config: DynamicDialogConfig = {
+            header: 'Cadastrar',
+            width: '50vw',
+            modal: true,
+            focusTrap: true,
+            dismissableMask: false,
+            draggable: false,
+            closable: true,
+            position: 'center',
+            appendTo: 'body',
+            breakpoints: {
+                '960px': '75vw',
+                '640px': '90vw'
+            },
+            inputValues: {
+                reuniaoId: this.reuniao().id,
+                pautaId: this.pauta().id,
+                selecionados: this.lista().map(item => item.id),
+            }
+        };
 
-    protected abrirModalBloqueio(): void {
-        console.log('novo bloqueio');
+        if (opcao) {
+            config.data = {
+                opcao: opcao
+            };
+        }
+
+        const ref = this.dialogService.open(NaoVotanteEditar, config);
+
+        // ref?.onClose.subscribe({
+        //     next: (result: OpcaoVoto | undefined) => {
+        //         console.log('onClose', result);
+        //         if (!result) {
+        //             return;
+        //         }
+        //         this.loading.set(true);
+        //         if (opcao) {
+        //             this.lista.update((lista) => {
+        //                 return lista.map((item) => (item.id === result.id ? result : item));
+        //             });
+        //             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Opção atualizada com sucesso.' });
+        //         } else {
+        //             this.lista.update((lista) => [...lista, result]);
+        //             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Opção cadastrada com sucesso.' });
+        //         }
+        //         this.loading.set(false);
+        //     }
+        // });
     }
 
     protected async removerBloqueio(id: number): Promise<void> {
@@ -58,5 +100,15 @@ export class NaoVotantes {
         // );
 
         // await this.carregarBloqueios(this.pauta().id);
+    }
+
+    private async carregarBloqueios(reuniaoId: number, pautaId: number): Promise<void> {
+        this.loading.set(true);
+        try {
+            const bloqueios = await firstValueFrom(this.bloqueioVotoService.listar(reuniaoId, pautaId));
+            this.lista.set(bloqueios);
+        } finally {
+            this.loading.set(false);
+        }
     }
 }

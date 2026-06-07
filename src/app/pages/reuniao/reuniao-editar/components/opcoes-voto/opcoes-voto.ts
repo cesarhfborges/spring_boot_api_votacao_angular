@@ -32,9 +32,9 @@ export class OpcoesVoto {
     protected loading = signal<boolean>(false);
 
     private readonly dialogService = inject(DialogService);
-    private readonly confirmationService = inject(ConfirmationService);
     private readonly messageService = inject(MessageService);
     private readonly opcaoVotoService = inject(OpcaoVotoService);
+    private readonly confirmationService = inject(ConfirmationService);
 
     constructor() {
         effect(() => {
