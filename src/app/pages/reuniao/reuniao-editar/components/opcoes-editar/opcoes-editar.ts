@@ -11,11 +11,10 @@ import { OpcaoVotoService } from '@/app/core/services/opcao-voto-service';
 import { lastValueFrom } from 'rxjs';
 import { RadioButton } from 'primeng/radiobutton';
 import { TipoVoto } from '@/app/core/models/opcao-voto';
-import { JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'app-opcoes-editar',
-    imports: [Button, InputText, ReactiveFormsModule, Textarea, Select, RadioButton, JsonPipe],
+    imports: [Button, InputText, ReactiveFormsModule, Textarea, Select, RadioButton],
     templateUrl: './opcoes-editar.html',
     styleUrl: './opcoes-editar.scss'
 })
@@ -69,9 +68,18 @@ export class OpcoesEditar implements OnInit {
             let res = undefined;
 
             if (this.dialogConfig.data?.opcao?.id) {
-                res = await lastValueFrom(this.opcaoVotoService.update(this.reuniaoId(), this.pautaId(), this.dialogConfig.data.opcao.id, this.form.value));
+                res = await lastValueFrom(
+                    this.opcaoVotoService.update(
+                        this.reuniaoId(),
+                        this.pautaId(),
+                        this.dialogConfig.data.opcao.id,
+                        this.form.value
+                    )
+                );
             } else {
-                res = await lastValueFrom(this.opcaoVotoService.create(this.reuniaoId(), this.pautaId(), this.form.value));
+                res = await lastValueFrom(
+                    this.opcaoVotoService.create(this.reuniaoId(), this.pautaId(), this.form.value)
+                );
             }
 
             this.dialogRef.close(res);
