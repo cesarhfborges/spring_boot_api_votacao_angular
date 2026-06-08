@@ -25,4 +25,8 @@ export class PautaService {
     public create(reuniaoId: number, data: any): Observable<Pauta> {
         return this.http.post<Pauta>(`${environment.apiUrl}/reunioes/${reuniaoId}/pautas`, data);
     }
+
+    public excluir(reuniaoId: number, id: number): Observable<any> {
+        return this.http.delete<any>(`${environment.apiUrl}/reunioes/${reuniaoId}/pautas/${id}`);
+    }
 }

@@ -202,8 +202,9 @@ export class OpcoesVoto {
             await firstValueFrom(this.opcaoVotoService.excluir(this.reuniao().id, this.pauta().id, id));
             this.lista.update((lista) => lista.filter((opcao) => opcao.id !== id));
             this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
-        } catch (error) {
+        } catch (error: any) {
             this.messageService.add({ severity: 'error', summary: 'Ops', detail: 'Não foi possível executar esta ação.' });
+            console.error(error);
         }
     }
 

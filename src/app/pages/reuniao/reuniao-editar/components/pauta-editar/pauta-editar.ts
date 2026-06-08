@@ -50,7 +50,7 @@ export class PautaEditar implements OnInit {
 
     ngOnInit(): void {
         console.log('PautaEditar', this.dialogConfig.data);
-        if (this.dialogConfig.data.pauta) {
+        if (this.dialogConfig.data?.pauta) {
             this.form.patchValue(this.dialogConfig.data.pauta);
         }
     }
@@ -69,7 +69,7 @@ export class PautaEditar implements OnInit {
 
             let res;
 
-            if (this.dialogConfig.data.pauta.id) {
+            if (this.dialogConfig?.data?.pauta?.id) {
                 res = await lastValueFrom(
                     this.pautaService.update(this.reuniaoId(), this.dialogConfig.data.pauta.id, this.form.value)
                 );

@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 import { PautaCard } from '@/app/pages/reuniao/reuniao-editar/components/pauta-card/pauta-card';
 import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { PautaEditar } from '@/app/pages/reuniao/reuniao-editar/components/pauta-editar/pauta-editar';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-pauta-detalhe',
@@ -29,6 +29,7 @@ export class PautaDetalhe implements OnInit {
     private readonly pautaService = inject(PautaService);
     private readonly dialogService = inject(DialogService);
     private readonly messageService = inject(MessageService);
+    private readonly confirmationService = inject(ConfirmationService);
 
     ngOnInit(): void {
         void this.carregarPautas();
@@ -95,11 +96,40 @@ export class PautaDetalhe implements OnInit {
         });
     }
 
-    protected async excluirPauta(id: number): Promise<void> {
-        console.log('excluir pauta', id);
+    protected async confirmarExcluir(id: number): Promise<void> {
+        console.log('excluir opção', id);
+        this.confirmationService.confirm({
+            // target: event.target as EventTarget,
+            header: 'Atenção',
+            message: 'Deseja excluir este registro?',
+            icon: 'pi pi-info-circle',
+            rejectLabel: 'Cancelar',
+            rejectButtonProps: {
+                label: 'Cancelar',
+                severity: 'secondary',
+                outlined: true
+            },
+            acceptButtonProps: {
+                label: 'Sim, excluir',
+                severity: 'danger'
+            },
+            accept: () => this.excluirPauta(id)
+        });
+    }
 
-        // await firstValueFrom(this.pautaService.excluir(id));
-        // await this.carregarPautas();
+    protected async excluirPauta(id: number): Promise<void> {
+        try {
+            await firstValueFrom(this.pautaService.excluir(this.reuniaoId(), id));
+            this.pautas.update((lista) => lista.filter((opcao) => opcao.id !== id));
+            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+        } catch (error: any) {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Ops',
+                detail: 'Não foi possível executar esta ação.'
+            });
+            console.error(error);
+        }
     }
 
     private async carregarPautas(): Promise<void> {

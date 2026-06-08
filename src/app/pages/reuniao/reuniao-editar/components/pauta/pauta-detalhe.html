@@ -31,7 +31,7 @@
                 [estaSelecionada]="pautaSelecionada()?.id === pauta.id"
                 (onSelecionar)="selecionarPauta($event)"
                 (onEditar)="editarPauta($event)"
-                (onExcluir)="excluirPauta($event)"
+                (onExcluir)="confirmarExcluir($event)"
             />
 
         } @empty {
