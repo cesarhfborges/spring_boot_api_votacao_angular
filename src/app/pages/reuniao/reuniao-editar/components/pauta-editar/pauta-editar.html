@@ -1,8 +1,8 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="flex flex-col gap-4 pt-2">
         <div class="flex flex-col gap-4 pt-2">
             <div class="flex flex-col gap-1">
-                <label for="titulo" class="text-sm font-semibold text-slate-700">Título</label>
+                <label for="titulo" class="text-sm font-semibold">Título</label>
                 <input
                     pInputText
                     id="titulo"
@@ -11,7 +11,7 @@
                 />
             </div>
             <div class="flex flex-col gap-1">
-                <label for="descricao" class="text-sm font-semibold text-slate-700">Descrição / Contexto</label>
+                <label for="descricao" class="text-sm font-semibold">Descrição / Contexto</label>
                 <textarea
                     pInputTextarea
                     id="descricao"
@@ -22,7 +22,7 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div class="flex flex-col gap-4">
-                    <span class="text-sm font-semibold text-slate-700">Descrição / Contexto</span>
+                    <span class="text-sm font-semibold">Descrição / Contexto</span>
                     <div class="flex flex-col gap-4">
                         @for (tipoVoto of tipoVotos; track $index) {
                             <div class="flex items-center">
@@ -39,7 +39,7 @@
                 </div>
                 @if (form.get('limiteSelecoes')) {
                     <div class="flex-auto">
-                        <label class="mb-2 block text-sm font-semibold text-slate-700" for="horizontal">Limite de
+                        <label class="mb-2 block text-sm font-semibold" for="horizontal">Limite de
                             seleção</label>
                         <p-input-number
                             formControlName="limiteSelecoes"
@@ -61,9 +61,16 @@
                 }
             </div>
         </div>
-        <div class="flex justify-between border-t pt-4">
-            <p-button label="Cancelar" icon="pi pi-times" [text]="true" severity="secondary" (click)="close()" />
-            <p-button label="Salvar" icon="pi pi-check" />
+        <div class="flex justify-between border-t border-surface pt-4">
+            <p-button
+                type="button"
+                label="Cancelar"
+                icon="pi pi-times"
+                [text]="true"
+                severity="secondary"
+                (click)="close()"
+            />
+            <p-button type="submit" label="Salvar" icon="pi pi-check" />
         </div>
     </div>
 </form>

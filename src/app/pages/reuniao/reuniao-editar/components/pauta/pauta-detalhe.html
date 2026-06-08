@@ -17,7 +17,7 @@
                 label="Nova Pauta"
                 icon="pi pi-plus"
                 severity="success"
-                (onClick)="abrirModalNovaPauta()" />
+                (onClick)="editarPauta()" />
 
         </div>
     </ng-template>
@@ -36,10 +36,17 @@
 
         } @empty {
             <div class="py-8 text-center text-slate-400">
-                <i class="pi pi-inbox text-2xl mb-2 block"></i>
-                <p>
-                    Nenhuma pauta cadastrada.
-                </p>
+                @if (this.loading()) {
+                    <i class="pi pi-inbox text-2xl mb-2 block"></i>
+                    <p>
+                        Carregando...
+                    </p>
+                } @else {
+                    <i class="pi pi-inbox text-2xl mb-2 block"></i>
+                    <p>
+                        Nenhuma pauta cadastrada.
+                    </p>
+                }
             </div>
         }
     </div>

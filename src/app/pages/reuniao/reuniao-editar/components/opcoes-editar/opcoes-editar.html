@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-4 pt-2">
         <div class="flex flex-col gap-4 pt-2">
             <div class="flex flex-col gap-1">
-                <label for="titulo" class="text-sm font-semibold text-slate-700">Título</label>
+                <label for="titulo" class="text-sm font-semibold">Título</label>
                 <p-select
                     [options]="icones"
                     formControlName="icone"
@@ -33,7 +33,7 @@
                 </p-select>
             </div>
             <div class="flex flex-col gap-1">
-                <label for="titulo" class="text-sm font-semibold text-slate-700">Título</label>
+                <label for="titulo" class="text-sm font-semibold">Título</label>
                 <input
                     pInputText
                     id="titulo"
@@ -42,7 +42,7 @@
                 />
             </div>
             <div class="flex flex-col gap-1">
-                <label for="descricao" class="text-sm font-semibold text-slate-700">Descrição / Contexto</label>
+                <label for="descricao" class="text-sm font-semibold">Descrição / Contexto</label>
                 <textarea
                     pInputTextarea
                     id="descricao"
@@ -52,7 +52,7 @@
                 ></textarea>
             </div>
             <div class="flex flex-col gap-1">
-                <label for="descricao" class="text-sm font-semibold text-slate-700">Tipo</label>
+                <label for="descricao" class="text-sm font-semibold">Tipo</label>
                 @for (tipo of tiposVoto; track $index) {
                     <div class="flex items-center">
                         <p-radio-button
@@ -66,7 +66,7 @@
                 }
             </div>
         </div>
-        <div class="flex justify-between border-t pt-4">
+        <div class="flex justify-between border-t border-surface pt-4">
             <p-button
                 label="Cancelar"
                 icon="pi pi-times"

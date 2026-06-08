@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-4 pt-2">
         <div class="flex flex-col gap-4 pt-2">
             <div class="flex flex-col gap-1">
-                <label for="titulo" class="text-sm font-semibold text-slate-700">Usuário</label>
+                <label for="titulo" class="text-sm font-semibold">Usuário</label>
                 <p-select
                     [options]="usuarios()"
                     formControlName="funcionarioId"
@@ -33,7 +33,7 @@
                 </p-select>
             </div>
             <div class="flex flex-col gap-1">
-                <label for="motivo" class="text-sm font-semibold text-slate-700">Motivo</label>
+                <label for="motivo" class="text-sm font-semibold">Motivo</label>
                 <input
                     pInputText
                     id="motivo"
@@ -42,7 +42,7 @@
                 />
             </div>
         </div>
-        <div class="flex justify-between border-t pt-4">
+        <div class="flex justify-between border-t border-surface pt-4">
             <p-button
                 label="Cancelar"
                 icon="pi pi-times"
