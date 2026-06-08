@@ -1,5 +1,9 @@
 <div
+    role="button"
+    tabindex="0"
     (click)="selecionar()"
+    (keydown.enter)="selecionar()"
+    (keydown.space)="selecionar(); $event.preventDefault()"
     [class]="
         'group cursor-pointer rounded-lg border p-4 transition-all ' +
         (

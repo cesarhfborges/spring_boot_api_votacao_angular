@@ -29,23 +29,23 @@ export class PautaEditar implements OnInit {
         this.form = this.fb.group({
             titulo: ['', [Validators.required]],
             descricao: ['', [Validators.required]],
-            tipoVoto: ['', [Validators.required]],
+            tipoVoto: ['', [Validators.required]]
         });
 
         this.form.get('tipoVoto')?.valueChanges.subscribe({
-            next: value => {
+            next: (value) => {
                 if (value === 'UNICO') {
                     this.form.removeControl('limiteSelecoes');
                 } else {
-                    this.form.addControl('limiteSelecoes', new FormControl(0, [Validators.required]));
+                    this.form.addControl('limiteSelecoes', new FormControl(1, [Validators.required]));
                 }
             }
-        })
+        });
     }
 
     ngOnInit(): void {
         console.log('PautaEditar', this.dialogConfig.data);
-        if (!!this.dialogConfig.data.pauta) {
+        if (this.dialogConfig.data.pauta) {
             this.form.patchValue(this.dialogConfig.data.pauta);
         }
     }

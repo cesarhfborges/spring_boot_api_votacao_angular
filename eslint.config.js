@@ -21,6 +21,7 @@ module.exports = defineConfig([
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-inferrable-types': 'off',
             '@typescript-eslint/explicit-function-return-type': 'off',
+            '@angular-eslint/no-output-on-prefix': 'off',
             '@angular-eslint/directive-selector': [
                 'error',
                 {
