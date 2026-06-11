@@ -15,11 +15,9 @@ import { LayoutService } from '@/app/shared/layout/service/layout.service';
     `
 })
 export class AppSidebar implements OnInit, OnDestroy {
-    layoutService = inject(LayoutService);
-
-    router = inject(Router);
-
-    el = inject(ElementRef);
+    private readonly router = inject(Router);
+    private readonly el = inject(ElementRef);
+    private readonly layoutService = inject(LayoutService);
 
     private outsideClickListener: ((event: MouseEvent) => void) | null = null;
 
