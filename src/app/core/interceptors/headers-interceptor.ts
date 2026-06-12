@@ -7,6 +7,7 @@ export const headersInterceptor: HttpInterceptorFn = (req, next) => {
     const token = sessionService.getToken();
 
     const headers: Record<string, string> = {
+        Application: 'web',
         Accept: 'application/json'
     };
 
@@ -19,6 +20,9 @@ export const headersInterceptor: HttpInterceptorFn = (req, next) => {
         headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const clonedReq = req.clone({ setHeaders: headers });
+    const clonedReq = req.clone({
+        setHeaders: headers,
+        withCredentials: true
+    });
     return next(clonedReq);
 };

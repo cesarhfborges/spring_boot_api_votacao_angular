@@ -45,4 +45,9 @@ export class ReuniaoEditar implements OnInit {
 
         this.reuniao.set(reuniao);
     }
+
+    public async fazerCheckin(): Promise<void> {
+        const checkin = await firstValueFrom(this.reuniaoService.checkin(this.reuniao()!.id));
+        console.log('Checkin: ', checkin);
+    }
 }

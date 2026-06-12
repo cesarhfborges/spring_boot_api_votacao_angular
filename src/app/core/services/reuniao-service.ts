@@ -17,4 +17,8 @@ export class ReuniaoService {
     public get(id: number): Observable<Reuniao> {
         return this.http.get<Reuniao>(`${environment.apiUrl}/reunioes/${id}`);
     }
+
+    public checkin(id: number): Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/reunioes/${id}/checkin`, {});
+    }
 }

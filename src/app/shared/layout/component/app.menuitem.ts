@@ -36,7 +36,7 @@ import { LayoutService } from '@/app/shared/layout/service/layout.service';
                 routerLinkActive="active-route"
                 [routerLinkActiveOptions]="
                     item().routerLinkActiveOptions || {
-                        paths: 'exact',
+                        paths: 'subset',
                         queryParams: 'ignored',
                         matrixParams: 'ignored',
                         fragment: 'ignored'

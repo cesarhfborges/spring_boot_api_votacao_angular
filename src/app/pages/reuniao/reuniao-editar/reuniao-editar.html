@@ -20,6 +20,7 @@
                     [pautaSelecionada]="pautaSelecionada()"
                     (onSelecionarPauta)="selecionarPauta($event)"
                 />
+                <button type="button" (click)="fazerCheckin()">Teste</button>
             </div>
             <div class="lg:col-span-2">
                 @if (pautaSelecionada(); as pauta) {
