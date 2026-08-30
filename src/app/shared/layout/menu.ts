@@ -11,17 +11,17 @@ export const menu: MenuItem[] = [
             {
                 label: 'Usuários',
                 icon: 'pi pi-users',
-                routerLink: ['/usuarios']
+                routerLink: ['/cadastro/usuarios']
             },
             {
                 label: 'Perfis de Acesso',
                 icon: 'pi pi-shield',
-                routerLink: ['/perfis']
+                routerLink: ['/cadastro/perfis-de-acesso']
             },
             {
                 label: 'Reunião',
                 icon: 'pi pi-calendar',
-                routerLink: ['/reuniao']
+                routerLink: ['/cadastro/reuniao']
             }
         ]
     },

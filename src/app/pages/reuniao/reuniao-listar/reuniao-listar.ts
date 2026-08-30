@@ -71,7 +71,7 @@ export class ReuniaoListar implements OnInit {
 
     entrar(reuniao: Reuniao) {
         this.messageService.add({ severity: 'info', summary: 'Entrar', detail: `Entrando ${reuniao.titulo} na reunião` });
-        void this.router.navigate(['/reuniao', reuniao.id]);
+        void this.router.navigate(['/cadastro/reuniao', reuniao.id]);
     }
 
     protected definirItemAtivo(item: Reuniao): void {
