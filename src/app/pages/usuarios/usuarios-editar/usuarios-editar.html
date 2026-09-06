@@ -1,1 +1,68 @@
-<p>usuarios-editar works!</p>
+<form [formGroup]="form" (submit)="onSubmit()">
+    <p-card>
+
+        <ng-template #title>Cadastro</ng-template>
+        <ng-template #subtitle>Informações pessoais</ng-template>
+
+        <div class="flex flex-col gap-3">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex flex-col grow basis-0 gap-2">
+                    <label for="nome">Nome</label>
+                    <input fluid formControlName="nome" id="nome" pInputText type="text" />
+                    <app-invalid-field [control]="form.get('nome')" />
+                </div>
+                <div class="flex flex-col grow basis-0 gap-2">
+                    <label for="sobrenome">Sobrenome</label>
+                    <input fluid formControlName="sobrenome" id="sobrenome" pInputText type="text" />
+                    <app-invalid-field [control]="form.get('sobrenome')" />
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex flex-col grow basis-0 gap-2">
+                    <label for="dataNascimento">Data nascimento</label>
+                    <p-date-picker
+                        [maxDate]="config.date.min"
+                        [showIcon]="true"
+                        [showOnFocus]="false"
+                        fluid
+                        formControlName="dataNascimento"
+                        inputId="dataNascimento"
+                        pInputMask="99/99/9999"
+                    />
+                    <app-invalid-field [control]="form.get('dataNascimento')" />
+                </div>
+                <div class="flex flex-col grow basis-0 gap-2">
+                    <label for="cpf">cpf</label>
+                    <input [pInputMaskUnstyled]="false" fluid formControlName="cpf" pInputMask="999.999.999-99"
+                           pInputText />
+                    <app-invalid-field [control]="form.get('cpf')" />
+                </div>
+                <div class="flex flex-col grow basis-0 gap-2">
+                    <label for="rg">rg</label>
+                    <input fluid formControlName="rg" pInputText />
+                    <app-invalid-field [control]="form.get('rg')" />
+                </div>
+            </div>
+        </div>
+
+        <ng-template #footer>
+            <div class="flex justify-between items-center gap-4">
+                <div class="h-14 w-64 shrink">
+                    <button [outlined]="true" fluid pButton severity="secondary" type="button">Voltar</button>
+                </div>
+                <div class="h-14 w-64 shrink">
+                    <button fluid pButton type="submit">Salvar</button>
+                </div>
+            </div>
+        </ng-template>
+    </p-card>
+</form>
+<pre>
+    <code>
+        {{ form.value | json }}
+    </code>
+    <code>
+        {{ invalidos() | json }}
+    </code>
+</pre>

@@ -13,7 +13,21 @@ export class FuncionariosService {
 
     public listar(options?: HttpOptions): Observable<Funcionario[]> {
         const params = buildHttpParams(options);
-
         return this.http.get<Funcionario[]>(`${environment.apiUrl}/funcionarios`, { params });
+    }
+
+    public get(value: number, options?: HttpOptions): Observable<Funcionario> {
+        const params = buildHttpParams(options);
+        return this.http.get<Funcionario>(`${environment.apiUrl}/funcionarios/${value}`, { params });
+    }
+
+    public create(value: any, options?: HttpOptions): Observable<Funcionario> {
+        const params = buildHttpParams(options);
+        return this.http.post<Funcionario>(`${environment.apiUrl}/funcionarios`, value, { params });
+    }
+
+    public update(id: number, value: any, options?: HttpOptions): Observable<Funcionario> {
+        const params = buildHttpParams(options);
+        return this.http.put<Funcionario>(`${environment.apiUrl}/funcionarios/${id}`, value, { params });
     }
 }

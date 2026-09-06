@@ -31,6 +31,8 @@
                         (onEditar)="editarPauta($event)"
                         (onExcluir)="confirmarExcluir($event)"
                         (onSelecionar)="selecionarPauta($event)"
+                        (onUpdate)="atualizarPauta()"
+
                         [estaSelecionada]="pautaSelecionada()?.id === pauta.id"
                         [pauta]="pauta"
                         [reuniaoId]="reuniaoId()"

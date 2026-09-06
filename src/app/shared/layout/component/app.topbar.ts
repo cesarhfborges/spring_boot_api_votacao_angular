@@ -168,7 +168,7 @@ export class AppTopbar {
 
     protected production = environment.production;
 
-    private _router = inject(Router);
+    private readonly _router = inject(Router);
     private readonly messageService = inject(MessageService);
     private readonly confirmationService = inject(ConfirmationService);
 

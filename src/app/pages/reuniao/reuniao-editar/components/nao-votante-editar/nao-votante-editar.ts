@@ -41,7 +41,7 @@ export class NaoVotanteEditar implements OnInit {
         this.funcionariosService.listar({ sort: 'id', direction: 'ASC' }).subscribe({
             next: (data) => {
                 console.log('NaoVotanteEditar: ', data);
-                const limpo = data.filter((i) => !this.selecionados().includes(i.id));
+                const limpo = data.filter((i) => !this.selecionados().includes(i.id!));
                 console.log('NaoVotanteEditar: ', limpo);
                 this.usuarios.set(limpo);
             }

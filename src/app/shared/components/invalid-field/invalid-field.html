@@ -1,0 +1,21 @@
+<!--@if (errorMessage; as message) {-->
+<!--    <div class="help-block text-danger d-flex align-items-center animate-[fadeSlideIn_150ms_ease-out]">-->
+<!--        <i class="ft-alert-circle align-middle"></i>-->
+<!--        <span class="ms-1">{{ message }}</span>-->
+<!--    </div>-->
+<!--}-->
+<div
+    [class.-translate-y-2]="!errorMessage"
+    [class.max-h-0]="!errorMessage"
+    [class.max-h-24]="errorMessage"
+    [class.opacity-0]="!errorMessage"
+    [class.opacity-100]="errorMessage"
+    [class.pointer-events-none]="!errorMessage"
+    [class.translate-y-0]="errorMessage"
+    class="invalid-message overflow-hidden transition-all duration-150 ease-out"
+>
+    <div class="help-block text-danger d-flex align-items-center">
+        <i class="ft-alert-circle align-middle"></i>
+        <span class="ms-1">{{ errorMessage }}</span>
+    </div>
+</div>

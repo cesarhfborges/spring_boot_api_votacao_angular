@@ -31,6 +31,7 @@ export class PautaCard implements OnInit {
     readonly onSelecionar = output<Pauta>();
     readonly onEditar = output<Pauta>();
     readonly onExcluir = output<number>();
+    readonly onUpdate = output<Pauta>();
 
     readonly agora = signal(Date.now());
 
@@ -55,9 +56,7 @@ export class PautaCard implements OnInit {
         const segundos = totalSegundos % 60;
         return {
             restante: [horas, minutos, segundos].map((v) => String(v).padStart(2, '0')).join(':'),
-
             percentual,
-
             menosDeUmMinuto: horas === 0 && minutos === 0 && segundos <= 59
         };
     });
@@ -79,16 +78,17 @@ export class PautaCard implements OnInit {
         this.socket
             .subscribe(`/topic/reunioes/${this.reuniaoId()}`)
             .pipe(filter((evento: any) => evento.pautaId === this.pauta().id))
-            .subscribe((evento) => {
-                console.log(evento);
+            .subscribe((evento: any) => {
+                console.log('evento socket: ', evento);
                 void this.carregarPauta();
             });
     }
 
     async carregarPauta(): Promise<void> {
-        const pautas = await firstValueFrom(this.pautaService.get(this.reuniaoId(), this.pauta().id));
-        console.log('carregarPauta: ', pautas);
+        const pauta = await firstValueFrom(this.pautaService.get(this.reuniaoId(), this.pauta().id));
+        // console.log('carregarPauta: ', pauta);
         // this.pauta = pauta;
+        this.onUpdate.emit(pauta);
     }
 
     async fecharVotacao(event: Event): Promise<void> {

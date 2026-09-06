@@ -40,10 +40,12 @@ export class ReuniaoSocketService {
 
         this.client.onConnect = () => {
             this.connected = true;
+            console.log('onConnect: ', this.connected);
         };
 
         this.client.onDisconnect = () => {
             this.connected = false;
+            console.log('onDisconnect: ', this.connected);
         };
 
         this.client.activate();

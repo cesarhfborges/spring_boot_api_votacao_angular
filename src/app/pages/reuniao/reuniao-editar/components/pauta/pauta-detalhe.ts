@@ -137,4 +137,17 @@ export class PautaDetalhe implements OnInit {
         this.pautas.set(pautas);
         this.loading.set(false);
     }
+
+    protected atualizarPauta() {
+        // console.log('atualizarPauta: ', value);
+        // old = value;
+        // const lista: Pauta[] = this.pautas();
+        // lista.forEach((pauta: Pauta) => {
+        //     if (pauta.id === value.id) {
+        //         pauta = value;
+        //     }
+        // });
+        // this.pautas.set(lista);
+        void this.carregarPautas();
+    }
 }

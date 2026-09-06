@@ -5,10 +5,11 @@ import { TableModule } from 'primeng/table';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
+import { CardModule } from 'primeng/card';
 
 @Component({
     selector: 'app-usuarios-listar',
-    imports: [TableModule, ButtonModule, RouterLink],
+    imports: [TableModule, ButtonModule, RouterLink, CardModule],
     templateUrl: './usuarios-listar.html',
     styleUrl: './usuarios-listar.scss'
 })
