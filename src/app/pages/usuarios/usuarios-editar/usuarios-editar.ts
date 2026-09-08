@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FuncionariosService } from '@/app/core/services/funcionarios-service';
 import { DatePickerModule } from 'primeng/datepicker';
 import { FluidModule } from 'primeng/fluid';
@@ -56,6 +56,7 @@ export class UsuariosEditar implements OnInit {
     private readonly route = inject(ActivatedRoute);
     private readonly messageService = inject(MessageService);
     private readonly funcionariosService = inject(FuncionariosService);
+    private readonly router = inject(Router);
 
     constructor() {
         this.form = this.fb.group({
@@ -114,15 +115,42 @@ export class UsuariosEditar implements OnInit {
     }
 
     async cadastrar(value: any): Promise<void> {
-        console.log('cadastrar: ->>>>');
-        const res = await lastValueFrom(this.funcionariosService.create(value));
-        console.log('cadastrar: ', res);
+        try {
+            const res = await lastValueFrom(this.funcionariosService.create(value));
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Sucesso',
+                detail: 'Usuário cadastrado com sucesso!'
+            });
+            void this.router.navigate(['/cadastro/usuarios', res.id]);
+        } catch (e: any) {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erro',
+                detail: e.error.message ?? 'Erro ao atualizar usuário.'
+            });
+        }
     }
 
     async atualizar(id: number, value: any): Promise<void> {
-        console.log('atualizar: ->>>>');
-        const res = await lastValueFrom(this.funcionariosService.update(id, value));
-        console.log('atualizar: ', res);
+        try {
+            const res = await lastValueFrom(this.funcionariosService.update(id, value));
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Sucesso',
+                detail: 'Usuário atualizado com sucesso!'
+            });
+            this.form.patchValue({
+                ...res,
+                dataNascimento: res.dataNascimento ? parse(res.dataNascimento as any, 'yyyy-MM-dd', new Date()) : ''
+            });
+        } catch (e: any) {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erro',
+                detail: e.error.message ?? 'Erro ao atualizar usuário.'
+            });
+        }
     }
 
     protected invalidos() {

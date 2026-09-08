@@ -72,8 +72,10 @@ export class PautaCard implements OnInit {
     ngOnInit(): void {
         interval(1000)
             .pipe(startWith(0), takeUntilDestroyed(this.destroyRef))
-            .subscribe(() => {
-                this.agora.set(Date.now());
+            .subscribe({
+                next: () => {
+                    this.agora.set(Date.now());
+                }
             });
         this.socket
             .subscribe(`/topic/reunioes/${this.reuniaoId()}`)
