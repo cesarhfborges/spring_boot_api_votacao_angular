@@ -1,6 +1,6 @@
 {
   "name": "sakai-ng",
-  "version": "21.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -63,5 +63,8 @@
     "tailwindcss": "^4.1.11",
     "typescript": "~5.9.3",
     "typescript-eslint": "8.59.2"
+  },
+  "engines": {
+    "node": ">=22.0.0 <24.0.0"
   }
 }
